@@ -1,0 +1,25 @@
+{
+  "name": "cordova-plugin-aliyun-vod-player",
+  "version": "1.0.0",
+  "description": "cordova-plugin-aliyun-vod-player",
+  "cordova": {
+    "id": "cordova-plugin-aliyun-vod-player",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamifun/cordova-plugin-aliyun-vod-player.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "kamifun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kamifun/cordova-plugin-aliyun-vod-player/issues"
+  },
+  "homepage": "https://github.com/kamifun/cordova-plugin-aliyun-vod-player#readme"
+}
