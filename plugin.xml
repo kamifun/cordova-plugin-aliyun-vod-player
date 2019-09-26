@@ -7,10 +7,195 @@
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="AliyunVodPlayer">
-        <param name="android-package" value="cordova-plugin-aliyun-vod-player.AliyunVodPlayer" />
+        <param name="android-package" value="aliyun.vod.player.AliyunVodPlayer" />
       </feature>
     </config-file>
+
     <config-file parent="/*" target="AndroidManifest.xml"></config-file>
-    <source-file src="src/android/AliyunVodPlayer.java" target-dir="src/cordova-plugin-aliyun-vod-player/AliyunVodPlayer" />
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+      <uses-permission android:name="android.permission.WAKE_LOCK" />
+      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+      <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+      <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <activity android:name="com.aliyun.vodplayerview.activity.AliyunPlayerSkinActivity"
+          android:configChanges="orientation|keyboardHidden|screenSize"
+          android:screenOrientation="portrait"
+          android:theme="@style/Theme.AppCompat.NoActionBar">
+      </activity>
+    </config-file>
+
+    <framework src="src/android/AliyunVodPlayer.gradle" custom="true" type="gradleReference"/>
+    <source-file src="src/android/AliyunPlayer-4.7.0-part.aar" target-dir="libs" />
+    <source-file src="src/android/jniLibs/arm64-v8a/libalivcffmpeg.so" target-dir="libs/arm64-v8a" />
+    <source-file src="src/android/jniLibs/armeabi-v7a/libalivcffmpeg.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="src/android/AliyunVodPlayer.java" target-dir="src/aliyun/vod/player" />
+
+    <source-file src="src/android/com/svideo/common/utils/DensityUtils.java" target-dir="src/com/aliyun/svideo/common/utils" />
+    <source-file src="src/android/com/svideo/common/utils/ToastUtils.java" target-dir="src/com/aliyun/svideo/common/utils" />
+
+    <source-file src="src/android/com/aliyun/vodplayerview/activity/AliyunPlayerSkinActivity.java" target-dir="src/com/aliyun/vodplayerview/activity" />
+    <source-file src="src/android/com/aliyun/vodplayerview/activity/BaseActivity.java" target-dir="src/com/aliyun/vodplayerview/activity" />
+
+    <source-file src="src/android/com/aliyun/vodplayerview/constants/PlayParameter.java" target-dir="src/com/aliyun/vodplayerview/constants" />
+
+    <source-file src="src/android/com/aliyun/vodplayerview/listener/LockPortraitListener.java" target-dir="src/com/aliyun/vodplayerview/listener" />
+    <source-file src="src/android/com/aliyun/vodplayerview/listener/OnAutoPlayListener.java" target-dir="src/com/aliyun/vodplayerview/listener" />
+    <source-file src="src/android/com/aliyun/vodplayerview/listener/OnChangeQualityListener.java" target-dir="src/com/aliyun/vodplayerview/listener" />
+    <source-file src="src/android/com/aliyun/vodplayerview/listener/OnScreenCostingSingleTagListener.java" target-dir="src/com/aliyun/vodplayerview/listener" />
+    <source-file src="src/android/com/aliyun/vodplayerview/listener/OnStoppedListener.java" target-dir="src/com/aliyun/vodplayerview/listener" />
+    <source-file src="src/android/com/aliyun/vodplayerview/listener/QualityValue.java" target-dir="src/com/aliyun/vodplayerview/listener" />
+    <source-file src="src/android/com/aliyun/vodplayerview/listener/RefreshStsCallback.java" target-dir="src/com/aliyun/vodplayerview/listener" />
+
+    <source-file src="src/android/com/aliyun/vodplayerview/playlist/vod/core/AliyunVodHttpCommon.java" target-dir="src/com/aliyun/vodplayerview/playlist/vod/core" />
+
+    <source-file src="src/android/com/aliyun/vodplayerview/theme/ITheme.java" target-dir="src/com/aliyun/vodplayerview/theme" />
+
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/Common.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/DensityUtil.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/FixedToastUtils.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/ImageLoader.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/NetWatchdog.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/OrientationWatchDog.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/ScreenUtils.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/TimeFormater.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/VidStsUtil.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/WrapCheckGroup.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/WordWrapView.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+    <source-file src="src/android/com/aliyun/vodplayerview/utils/HttpClientUtil.java" target-dir="src/com/aliyun/vodplayerview/utils" />
+
+    <source-file src="src/android/com/aliyun/vodplayerview/view/choice/AlivcShowMoreDialog.java" target-dir="src/com/aliyun/vodplayerview/view/choice" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/control/ControlView.java" target-dir="src/com/aliyun/vodplayerview/view/control" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/function/AdvVideoView.java" target-dir="src/com/aliyun/vodplayerview/view/function" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/function/MutiSeekBarView.java" target-dir="src/com/aliyun/vodplayerview/view/function" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/gesture/GestureDialogManager.java" target-dir="src/com/aliyun/vodplayerview/view/gesture" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/gesture/GestureView.java" target-dir="src/com/aliyun/vodplayerview/view/gesture" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/gesture/GestureControl.java" target-dir="src/com/aliyun/vodplayerview/view/gesture" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/gesturedialog/BaseGestureDialog.java" target-dir="src/com/aliyun/vodplayerview/view/gesturedialog" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/gesturedialog/BrightnessDialog.java" target-dir="src/com/aliyun/vodplayerview/view/gesturedialog" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/gesturedialog/SeekDialog.java" target-dir="src/com/aliyun/vodplayerview/view/gesturedialog" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/gesturedialog/VolumeDialog.java" target-dir="src/com/aliyun/vodplayerview/view/gesturedialog" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/guide/GuideView.java" target-dir="src/com/aliyun/vodplayerview/view/guide" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/interfaces/ViewAction.java" target-dir="src/com/aliyun/vodplayerview/view/interfaces" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/more/AliyunShowMoreValue.java" target-dir="src/com/aliyun/vodplayerview/view/more" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/more/ShowMoreView.java" target-dir="src/com/aliyun/vodplayerview/view/more" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/more/SpeedValue.java" target-dir="src/com/aliyun/vodplayerview/view/more" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/quality/QualityItem.java" target-dir="src/com/aliyun/vodplayerview/view/quality" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/quality/QualityView.java" target-dir="src/com/aliyun/vodplayerview/view/quality" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/quality/QualityLanguage.java" target-dir="src/com/aliyun/vodplayerview/view/quality" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/speed/SpeedView.java" target-dir="src/com/aliyun/vodplayerview/view/speed" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/thumbnail/ThumbnailView.java" target-dir="src/com/aliyun/vodplayerview/view/thumbnail" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/tipsview/ErrorInfo.java" target-dir="src/com/aliyun/vodplayerview/view/tipsview" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/tipsview/ErrorView.java" target-dir="src/com/aliyun/vodplayerview/view/tipsview" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/tipsview/LoadingView.java" target-dir="src/com/aliyun/vodplayerview/view/tipsview" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/tipsview/NetChangeView.java" target-dir="src/com/aliyun/vodplayerview/view/tipsview" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/tipsview/ReplayView.java" target-dir="src/com/aliyun/vodplayerview/view/tipsview" />
+    <source-file src="src/android/com/aliyun/vodplayerview/view/tipsview/TipsView.java" target-dir="src/com/aliyun/vodplayerview/view/tipsview" />
+    <source-file src="src/android/com/aliyun/vodplayerview/widget/AliyunScreenMode.java" target-dir="src/com/aliyun/vodplayerview/widget" />
+    <source-file src="src/android/com/aliyun/vodplayerview/widget/AliyunVodPlayerView.java" target-dir="src/com/aliyun/vodplayerview/widget" />
+
+    <resource-file src="src/android/res/anim/view_speed_hide.xml" target="res/anim/view_speed_hide.xml"/>
+    <resource-file src="src/android/res/anim/view_speed_show.xml" target="res/anim/view_speed_show.xml"/>
+    
+    <resource-file src="src/android/res/color/alivc_player_font_speed_blue.xml" target="res/color/alivc_player_font_speed_blue.xml"/>
+    <resource-file src="src/android/res/color/alivc_player_font_speed_green.xml" target="res/color/alivc_player_font_speed_green.xml"/>
+    <resource-file src="src/android/res/color/alivc_player_font_speed_orange.xml" target="res/color/alivc_player_font_speed_orange.xml"/>
+    <resource-file src="src/android/res/color/alivc_player_font_speed_red.xml" target="res/color/alivc_player_font_speed_red.xml"/>
+
+    <resource-file src="src/android/res/drawable/alivc_dialog_error_bg.xml" target="res/drawable/alivc_dialog_error_bg.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_dialog_gesture_bg.xml" target="res/drawable/alivc_dialog_gesture_bg.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_info_seekbar_bg_blue.xml" target="res/drawable/alivc_info_seekbar_bg_blue.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_info_seekbar_bg_green.xml" target="res/drawable/alivc_info_seekbar_bg_green.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_info_seekbar_bg_orange.xml" target="res/drawable/alivc_info_seekbar_bg_orange.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_info_seekbar_bg_red.xml" target="res/drawable/alivc_info_seekbar_bg_red.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_rr_bg_blue.xml" target="res/drawable/alivc_rr_bg_blue.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_rr_bg_green.xml" target="res/drawable/alivc_rr_bg_green.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_rr_bg_orange.xml" target="res/drawable/alivc_rr_bg_orange.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_rr_bg_red.xml" target="res/drawable/alivc_rr_bg_red.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_rr_bg_white.xml" target="res/drawable/alivc_rr_bg_white.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_volume_img.xml" target="res/drawable/alivc_volume_img.xml"/>
+    <resource-file src="src/android/res/drawable/loading_rotate.xml" target="res/drawable/loading_rotate.xml"/>
+    <resource-file src="src/android/res/drawable/rate_dialog_bkg.xml" target="res/drawable/rate_dialog_bkg.xml"/>
+    <resource-file src="src/android/res/drawable/round_bkg_s.xml" target="res/drawable/round_bkg_s.xml"/>
+    <resource-file src="src/android/res/drawable/round_bkg_selector.xml" target="res/drawable/round_bkg_selector.xml"/>
+    <resource-file src="src/android/res/drawable/round_bkg_us.xml" target="res/drawable/round_bkg_us.xml"/>
+
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_brightness.png" target="res/drawable-xhdpi/alivc_brightness.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_dialog_seek_thumb.png" target="res/drawable-xhdpi/alivc_dialog_seek_thumb.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_dialog_voice_down.png" target="res/drawable-xhdpi/alivc_dialog_voice_down.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_dialog_voice_up.png" target="res/drawable-xhdpi/alivc_dialog_voice_up.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_guide_center.png" target="res/drawable-xhdpi/alivc_guide_center.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_guide_left.png" target="res/drawable-xhdpi/alivc_guide_left.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_guide_right.png" target="res/drawable-xhdpi/alivc_guide_right.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_info_seekbar_thumb_blue.png" target="res/drawable-xhdpi/alivc_info_seekbar_thumb_blue.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_info_seekbar_thumb_green.png" target="res/drawable-xhdpi/alivc_info_seekbar_thumb_green.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_info_seekbar_thumb_orange.png" target="res/drawable-xhdpi/alivc_info_seekbar_thumb_orange.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_info_seekbar_thumb_red.png" target="res/drawable-xhdpi/alivc_info_seekbar_thumb_red.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_infobar_bg.png" target="res/drawable-xhdpi/alivc_infobar_bg.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_light_down.png" target="res/drawable-xhdpi/alivc_light_down.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_light_up.png" target="res/drawable-xhdpi/alivc_light_up.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_loading_10.png" target="res/drawable-xhdpi/alivc_loading_10.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_more.png" target="res/drawable-xhdpi/alivc_more.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_playstate_pause.png" target="res/drawable-xhdpi/alivc_playstate_pause.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_playstate_play.png" target="res/drawable-xhdpi/alivc_playstate_play.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_rate_btn_focused_blue.png" target="res/drawable-xhdpi/alivc_rate_btn_focused_blue.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_rate_btn_focused_green.png" target="res/drawable-xhdpi/alivc_rate_btn_focused_green.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_rate_btn_focused_orange.png" target="res/drawable-xhdpi/alivc_rate_btn_focused_orange.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_rate_btn_focused_red.png" target="res/drawable-xhdpi/alivc_rate_btn_focused_red.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_rate_btn_nomal.png" target="res/drawable-xhdpi/alivc_rate_btn_nomal.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_screen_lock.png" target="res/drawable-xhdpi/alivc_screen_lock.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_screen_mode_large.png" target="res/drawable-xhdpi/alivc_screen_mode_large.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_screen_mode_small.png" target="res/drawable-xhdpi/alivc_screen_mode_small.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_screen_unlock.png" target="res/drawable-xhdpi/alivc_screen_unlock.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_seek_forward.png" target="res/drawable-xhdpi/alivc_seek_forward.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_seek_rewind.png" target="res/drawable-xhdpi/alivc_seek_rewind.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_seekbar_thumb_blue.png" target="res/drawable-xhdpi/alivc_seekbar_thumb_blue.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_speed_dot_blue.png" target="res/drawable-xhdpi/alivc_speed_dot_blue.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_speed_dot_green.png" target="res/drawable-xhdpi/alivc_speed_dot_green.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_speed_dot_orange.png" target="res/drawable-xhdpi/alivc_speed_dot_orange.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_speed_dot_red.png" target="res/drawable-xhdpi/alivc_speed_dot_red.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_titlebar_back_nomal.png" target="res/drawable-xhdpi/alivc_titlebar_back_nomal.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_titlebar_back_pressed.png" target="res/drawable-xhdpi/alivc_titlebar_back_pressed.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_titlebar_bg.png" target="res/drawable-xhdpi/alivc_titlebar_bg.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_volume_mute.png" target="res/drawable-xhdpi/alivc_volume_mute.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/alivc_volume_unmute.png" target="res/drawable-xhdpi/alivc_volume_unmute.png"/>
+    <resource-file src="src/android/res/drawable-xhdpi/ic_back.png" target="res/drawable-xhdpi/ic_back.png"/>
+
+    <resource-file src="src/android/res/drawable-xxhdpi/alivc_refresh_blue.png" target="res/drawable-xxhdpi/alivc_refresh_blue.png"/>
+    <resource-file src="src/android/res/drawable-xxhdpi/alivc_refresh_green.png" target="res/drawable-xxhdpi/alivc_refresh_green.png"/>
+    <resource-file src="src/android/res/drawable-xxhdpi/alivc_refresh_orange.png" target="res/drawable-xxhdpi/alivc_refresh_orange.png"/>
+    <resource-file src="src/android/res/drawable-xxhdpi/alivc_refresh_red.png" target="res/drawable-xxhdpi/alivc_refresh_red.png"/>
+
+    <resource-file src="src/android/res/layout/alivc_dialog_error.xml" target="res/layout/alivc_dialog_error.xml"/>
+    <resource-file src="src/android/res/layout/alivc_dialog_gesture.xml" target="res/layout/alivc_dialog_gesture.xml"/>
+    <resource-file src="src/android/res/layout/alivc_dialog_loading.xml" target="res/layout/alivc_dialog_loading.xml"/>
+    <resource-file src="src/android/res/layout/alivc_dialog_more.xml" target="res/layout/alivc_dialog_more.xml"/>
+    <resource-file src="src/android/res/layout/alivc_dialog_netchange.xml" target="res/layout/alivc_dialog_netchange.xml"/>
+    <resource-file src="src/android/res/layout/alivc_dialog_quality_list.xml" target="res/layout/alivc_dialog_quality_list.xml"/>
+    <resource-file src="src/android/res/layout/alivc_dialog_replay.xml" target="res/layout/alivc_dialog_replay.xml"/>
+    <resource-file src="src/android/res/layout/alivc_player_layout_skin.xml" target="res/layout/alivc_player_layout_skin.xml"/>
+    <resource-file src="src/android/res/layout/alivc_view_control.xml" target="res/layout/alivc_view_control.xml"/>
+    <resource-file src="src/android/res/layout/alivc_view_guide.xml" target="res/layout/alivc_view_guide.xml"/>
+    <resource-file src="src/android/res/layout/alivc_view_quality.xml" target="res/layout/alivc_view_quality.xml"/>
+    <resource-file src="src/android/res/layout/alivc_view_speed.xml" target="res/layout/alivc_view_speed.xml"/>
+    <resource-file src="src/android/res/layout/alivc_view_thumbnail.xml" target="res/layout/alivc_view_thumbnail.xml"/>
+    <resource-file src="src/android/res/layout/ratetype_item.xml" target="res/layout/ratetype_item.xml"/>
+    <resource-file src="src/android/res/layout/view_item_quality.xml" target="res/layout/view_item_quality.xml"/>
+
+    <resource-file src="src/android/res/values/alivc_strings.xml" target="res/values/alivc_strings.xml"/>
+    <resource-file src="src/android/res/values/alivc_attrs.xml" target="res/values/alivc_attrs.xml"/>
+    <resource-file src="src/android/res/values/alivc_colors.xml" target="res/values/alivc_colors.xml"/>
+    <resource-file src="src/android/res/values/alivc_dimens.xml" target="res/values/alivc_dimens.xml"/>
+    <resource-file src="src/android/res/values/alivc_ids.xml" target="res/values/alivc_ids.xml"/>
+    <resource-file src="src/android/res/values/alivc_styles.xml" target="res/values/alivc_styles.xml"/>
+
   </platform>
 </plugin>
