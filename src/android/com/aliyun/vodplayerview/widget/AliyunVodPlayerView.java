@@ -50,7 +50,6 @@ import com.aliyun.vodplayerview.utils.OrientationWatchDog;
 import com.aliyun.vodplayerview.utils.ScreenUtils;
 import com.aliyun.vodplayerview.utils.TimeFormater;
 import com.aliyun.vodplayerview.view.control.ControlView;
-import com.aliyun.vodplayerview.view.control.ControlView.OnDownloadClickListener;
 import com.aliyun.vodplayerview.view.gesture.GestureDialogManager;
 import com.aliyun.vodplayerview.view.gesture.GestureView;
 import com.aliyun.vodplayerview.view.guide.GuideView;
@@ -121,7 +120,7 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     //是否锁定全屏
     private boolean mIsFullScreenLocked = false;
     //当前屏幕模式
-    private AliyunScreenMode mCurrentScreenMode = AliyunScreenMode.Small;
+    private AliyunScreenMode mCurrentScreenMode = AliyunScreenMode.Full;
     //是不是在seek中
     private boolean inSeek = false;
     //播放是否完成
@@ -230,6 +229,9 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
         setTheme(Theme.Blue);
         //先隐藏手势和控制栏，防止在没有prepare的时候做操作。
         hideGestureAndControlViews();
+
+        //直接横屏
+        changedToLandForwardScape(true);
     }
 
     /**
@@ -805,21 +807,25 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
         mControlView.setOnBackClickListener(new ControlView.OnBackClickListener() {
             @Override
             public void onClick() {
-
-                if (mCurrentScreenMode == AliyunScreenMode.Full) {
-                    //设置为小屏状态
-                    changeScreenMode(AliyunScreenMode.Small, false);
-                } else if (mCurrentScreenMode == AliyunScreenMode.Small) {
-                    //小屏状态下，就结束活动
-                    Context context = getContext();
-                    if (context instanceof Activity) {
-                        ((Activity) context).finish();
-                    }
+                Context context = getContext();
+                if (context instanceof Activity) {
+                    ((Activity) context).finish();
                 }
 
-                if (mCurrentScreenMode == AliyunScreenMode.Small) {
-                    mControlView.hideMoreButton();
-                }
+//                if (mCurrentScreenMode == AliyunScreenMode.Full) {
+//                    //设置为小屏状态
+//                    changeScreenMode(AliyunScreenMode.Small, false);
+//                } else if (mCurrentScreenMode == AliyunScreenMode.Small) {
+//                    //小屏状态下，就结束活动
+//                    Context context = getContext();
+//                    if (context instanceof Activity) {
+//                        ((Activity) context).finish();
+//                    }
+//                }
+
+//                if (mCurrentScreenMode == AliyunScreenMode.Small) {
+//                    mControlView.hideMoreButton();
+//                }
             }
         });
 
@@ -1104,7 +1110,8 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
                     mGestureDialogManager.dismissBrightnessDialog();
                     mGestureDialogManager.dismissVolumeDialog();
 
-                    if (mThumbnailView != null && mThumbnailView.isShown()) {
+                    // if (mThumbnailView != null && mThumbnailView.isShown()) {
+                    if (mThumbnailView != null && inSeek) {
                         int seekPosition = mControlView.getVideoPosition();
                         if (seekPosition >= mAliyunVodPlayer.getDuration()) {
                             seekPosition = (int) (mAliyunVodPlayer.getDuration() - 1000);
@@ -1384,7 +1391,8 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     public void changeScreenMode(AliyunScreenMode targetMode, boolean isReverse) {
         VcPlayerLog.d(TAG, "mIsFullScreenLocked = " + mIsFullScreenLocked + " ， targetMode = " + targetMode);
 
-        AliyunScreenMode finalScreenMode = targetMode;
+        // AliyunScreenMode finalScreenMode = targetMode;
+        AliyunScreenMode finalScreenMode = AliyunScreenMode.Full;
 
         if (mIsFullScreenLocked) {
             finalScreenMode = AliyunScreenMode.Full;
@@ -2189,11 +2197,11 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (((mCurrentScreenMode == AliyunScreenMode.Full)) && (keyCode != KeyEvent.KEYCODE_HOME)
-                && keyCode != KeyEvent.KEYCODE_VOLUME_UP && keyCode != KeyEvent.KEYCODE_VOLUME_DOWN) {
-            changedToPortrait(true);
-            return false;
-        }
+//        if (((mCurrentScreenMode == AliyunScreenMode.Full)) && (keyCode != KeyEvent.KEYCODE_HOME)
+//                && keyCode != KeyEvent.KEYCODE_VOLUME_UP && keyCode != KeyEvent.KEYCODE_VOLUME_DOWN) {
+//            changedToPortrait(true);
+//            return false;
+//        }
         if (mIsFullScreenLocked && (keyCode != KeyEvent.KEYCODE_HOME)) {
             return false;
         }

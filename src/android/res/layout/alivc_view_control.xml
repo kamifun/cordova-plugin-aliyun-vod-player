@@ -180,12 +180,12 @@
         </FrameLayout>
 
 
-        <ImageView
-            android:id="@+id/alivc_screen_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/alivc_common_padding_8"
-            android:paddingRight="@dimen/alivc_common_padding_8" />
+        <!--<ImageView-->
+            <!--android:id="@+id/alivc_screen_mode"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="@dimen/alivc_common_padding_8"-->
+            <!--android:paddingRight="@dimen/alivc_common_padding_8" />-->
 
     </LinearLayout>
 

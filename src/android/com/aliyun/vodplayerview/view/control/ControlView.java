@@ -75,7 +75,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     //切换大小屏相关
     private AliyunScreenMode mAliyunScreenMode = AliyunScreenMode.Small;
     //全屏/小屏按钮
-    private ImageView mScreenModeBtn;
+//    private ImageView mScreenModeBtn;
 
     //大小屏公用的信息
     //视频信息，info显示用。
@@ -186,7 +186,7 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
         mTitlebarText = (TextView) findViewById(R.id.alivc_title_title);
         // mTitleDownload = (ImageView) findViewById(R.id.alivc_title_download);
         mTitleMore = (ImageView) findViewById(R.id.alivc_title_more);
-        mScreenModeBtn = (ImageView) findViewById(R.id.alivc_screen_mode);
+//        mScreenModeBtn = (ImageView) findViewById(R.id.alivc_screen_mode);
         mScreenLockBtn = (ImageView) findViewById(R.id.alivc_screen_lock);
         mPlayStateBtn = (ImageView) findViewById(R.id.alivc_player_state);
         // mScreenShot = findViewById(R.id.alivc_screen_shot);
@@ -263,14 +263,14 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
         // });
 
         //大小屏按钮监听
-        mScreenModeBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnScreenModeClickListener != null) {
-                    mOnScreenModeClickListener.onClick();
-                }
-            }
-        });
+//        mScreenModeBtn.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mOnScreenModeClickListener != null) {
+//                    mOnScreenModeClickListener.onClick();
+//                }
+//            }
+//        });
 
         //seekbar的滑动监听
         SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -729,11 +729,11 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      * 更新切换大小屏按钮的信息
      */
     private void updateScreenModeBtn() {
-        if (mAliyunScreenMode == AliyunScreenMode.Full) {
-            mScreenModeBtn.setImageResource(R.drawable.alivc_screen_mode_small);
-        } else {
-            mScreenModeBtn.setImageResource(R.drawable.alivc_screen_mode_large);
-        }
+//        if (mAliyunScreenMode == AliyunScreenMode.Full) {
+//            mScreenModeBtn.setImageResource(R.drawable.alivc_screen_mode_small);
+//        } else {
+//            mScreenModeBtn.setImageResource(R.drawable.alivc_screen_mode_large);
+//        }
     }
 
     /**

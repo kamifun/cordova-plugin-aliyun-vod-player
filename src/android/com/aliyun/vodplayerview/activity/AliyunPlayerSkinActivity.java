@@ -227,7 +227,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
     }
 
     private void onPrepared() {
-        FixedToastUtils.show(AliyunPlayerSkinActivity.this.getApplicationContext(), R.string.toast_prepare_success);
+//        FixedToastUtils.show(AliyunPlayerSkinActivity.this.getApplicationContext(), R.string.toast_prepare_success);
     }
 
     private static class MyCompletionListener implements IPlayer.OnCompletionListener {
@@ -599,7 +599,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
 
     private void onStsFail() {
 
-        FixedToastUtils.show(getApplicationContext(), R.string.request_vidsts_fail);
+        //FixedToastUtils.show(getApplicationContext(), R.string.request_vidsts_fail);
         inRequest = false;
         //finish();
     }
