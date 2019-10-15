@@ -743,14 +743,15 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
             public void onSeekStart(int position) {
                 //拖动开始
                 inSeek = true;
-                if(mThumbnailPrepareSuccess){
-                    showThumbnailView();
-                }
+//                if(mThumbnailPrepareSuccess){
+                showThumbnailView(position);
+//                }
             }
 
             @Override
             public void onProgressChanged(int progress) {
-                requestBitmapByPosition(progress);
+                mThumbnailView.setTime(TimeFormater.formatMs(progress));
+//                requestBitmapByPosition(progress);
             }
         });
         //菜单按钮点击
@@ -879,17 +880,20 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     /**
      * 显示缩略图
      */
-    private void showThumbnailView() {
-        if (mThumbnailView != null && mThumbnailPrepareSuccess) {
+    private void showThumbnailView(int targetPosition) {
+//        if (mThumbnailView != null && mThumbnailPrepareSuccess) {
+        if (mThumbnailView != null) {
+            mThumbnailView.setTime(TimeFormater.formatMs(targetPosition));
+            mThumbnailView.setDurationTime("/" + TimeFormater.formatMs(mAliyunMediaInfo.getDuration()));
             mThumbnailView.showThumbnailView();
             //根据屏幕大小调整缩略图的大小
-            ImageView thumbnailImageView = mThumbnailView.getThumbnailImageView();
-            if (thumbnailImageView != null) {
-                ViewGroup.LayoutParams layoutParams = thumbnailImageView.getLayoutParams();
-                layoutParams.width = (int) (ScreenUtils.getWidth(getContext()) / 3);
-                layoutParams.height = layoutParams.width / 2 - DensityUtils.px2dip(getContext(), 10);
-                thumbnailImageView.setLayoutParams(layoutParams);
-            }
+//            ImageView thumbnailImageView = mThumbnailView.getThumbnailImageView();
+//            if (thumbnailImageView != null) {
+//                ViewGroup.LayoutParams layoutParams = thumbnailImageView.getLayoutParams();
+//                layoutParams.width = (int) (ScreenUtils.getWidth(getContext()) / 3);
+//                layoutParams.height = layoutParams.width / 2 - DensityUtils.px2dip(getContext(), 10);
+//                thumbnailImageView.setLayoutParams(layoutParams);
+//            }
         }
     }
     /**
@@ -1068,8 +1072,8 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
                 if (mGestureDialogManager != null) {
                     inSeek = true;
                     mControlView.setVideoPosition(targetPosition);
-                    requestBitmapByPosition(targetPosition);
-                    showThumbnailView();
+//                    requestBitmapByPosition(targetPosition);
+                    showThumbnailView(targetPosition);
                 }
             }
 
@@ -2437,9 +2441,9 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     private void sourceVideoPlayerPrepared() {
         //需要将mThumbnailPrepareSuccess重置,否则会出现缩略图错乱的问题
         mThumbnailPrepareSuccess = false;
-        if(mThumbnailView != null){
-            mThumbnailView.setThumbnailPicture(null);
-        }
+//        if(mThumbnailView != null){
+//            mThumbnailView.setThumbnailPicture(null);
+//        }
 
         if (mAliyunVodPlayer == null) {
             return;
@@ -2474,7 +2478,7 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
                     if (thumbnailBitmapInfo != null && thumbnailBitmapInfo.getThumbnailBitmap() != null) {
                         Bitmap thumbnailBitmap = thumbnailBitmapInfo.getThumbnailBitmap();
                         mThumbnailView.setTime(TimeFormater.formatMs(l));
-                        mThumbnailView.setThumbnailPicture(thumbnailBitmap);
+//                        mThumbnailView.setThumbnailPicture(thumbnailBitmap);
                     }
                 }
 

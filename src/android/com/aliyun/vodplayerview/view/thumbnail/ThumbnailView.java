@@ -21,10 +21,11 @@ public class ThumbnailView extends LinearLayout {
      * 缩略图 time
      */
     private TextView mPositionTextView;
+    private TextView mDurationTextView;
     /**
      * 缩略图 picture
      */
-    private ImageView mThumbnailImageView;
+//    private ImageView mThumbnailImageView;
 
     public ThumbnailView(Context context) {
         super(context);
@@ -48,18 +49,23 @@ public class ThumbnailView extends LinearLayout {
 
     }
 
-    private void findAllViews() {
+     private void findAllViews() {
         mPositionTextView = (TextView) findViewById(R.id.tv_position);
-        mThumbnailImageView = (ImageView) findViewById(R.id.iv_thumbnail);
+        mDurationTextView = (TextView) findViewById(R.id.tv_duration);
+//        mThumbnailImageView = (ImageView) findViewById(R.id.iv_thumbnail);
     }
 
     public void setTime(String time) {
         mPositionTextView.setText(time);
     }
 
-    public void setThumbnailPicture(Bitmap bitmap) {
-        mThumbnailImageView.setImageBitmap(bitmap);
+    public void setDurationTime(String time) {
+        mDurationTextView.setText(time);
     }
+
+//    public void setThumbnailPicture(Bitmap bitmap) {
+//        mThumbnailImageView.setImageBitmap(bitmap);
+//    }
 
     public void showThumbnailView() {
         setVisibility(View.VISIBLE);
@@ -69,7 +75,8 @@ public class ThumbnailView extends LinearLayout {
         setVisibility(View.GONE);
     }
 
-    public ImageView getThumbnailImageView() {
-        return mThumbnailImageView;
-    }
+//    public ImageView getThumbnailImageView() {
+//        return mThumbnailImageView;
+//        return null;
+//    }
 }

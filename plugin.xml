@@ -127,6 +127,7 @@
     <resource-file src="src/android/res/drawable/round_bkg_s.xml" target="res/drawable/round_bkg_s.xml"/>
     <resource-file src="src/android/res/drawable/round_bkg_selector.xml" target="res/drawable/round_bkg_selector.xml"/>
     <resource-file src="src/android/res/drawable/round_bkg_us.xml" target="res/drawable/round_bkg_us.xml"/>
+    <resource-file src="src/android/res/drawable/alivc_round_thumbnail.xml" target="res/drawable/alivc_round_thumbnail.xml"/>
 
     <resource-file src="src/android/res/drawable-xhdpi/alivc_brightness.png" target="res/drawable-xhdpi/alivc_brightness.png"/>
     <resource-file src="src/android/res/drawable-xhdpi/alivc_dialog_seek_thumb.png" target="res/drawable-xhdpi/alivc_dialog_seek_thumb.png"/>
