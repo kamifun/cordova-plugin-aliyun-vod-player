@@ -97,7 +97,8 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
      * 开启设置界面的请求码
      */
     private static final int CODE_REQUEST_SETTING = 1000;
-    private static final String DEFAULT_VID = "8bb9b7d5c7c64cf49d51fa808b1f0957";
+//    private static final String DEFAULT_VID = "09cf8b916ecc4613aa4a0044f70a06fd";
+    private static final String DEFAULT_VID = "";
     /**
      * get StsToken stats
      */
@@ -121,8 +122,11 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alivc_player_layout_skin);
 
-        requestVidSts();
+        PlayParameter.PLAY_PARAM_TYPE = getIntent().getStringExtra("playType");
         PlayParameter.PLAY_PARAM_URL = getIntent().getStringExtra("videoPath");
+        PlayParameter.PLAY_PARAM_VID = getIntent().getStringExtra("videoId");
+        PlayParameter.PLAY_PARAM_REGION = getIntent().getStringExtra("region");
+        requestVidSts();
         initAliyunPlayerView();
     }
 
@@ -166,7 +170,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
         mAliyunVodPlayerView.setOnErrorListener(new MyOnErrorListener(this));
         mAliyunVodPlayerView.setScreenBrightness(BrightnessDialog.getActivityBrightness(AliyunPlayerSkinActivity.this));
         mAliyunVodPlayerView.enableNativeLog();
-        setPlaySource();
+//        setPlaySource();
     }
 
     /**
@@ -181,7 +185,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
         if (TextUtils.isEmpty(PlayParameter.PLAY_PARAM_VID)) {
             PlayParameter.PLAY_PARAM_VID = DEFAULT_VID;
         }
-        Log.e("scar", "requestVidSts:xx ");
+        Log.e("scar", "requestVidSts: " + PlayParameter.PLAY_PARAM_VID);
         VidStsUtil.getVidSts(PlayParameter.PLAY_PARAM_VID, new MyStsListener(this));
     }
 
@@ -613,6 +617,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
         mIsTimeExpired = false;
 
         inRequest = false;
+        setPlaySource();
     }
 
     private static class MyOrientationChangeListener implements AliyunVodPlayerView.OnOrientationChangeListener {
@@ -780,7 +785,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
                 }
                 activity.oldTime = currentClickTime;
                 activity.showMore(activity);
-                activity.requestVidSts();
+//                activity.requestVidSts();
             }
 
         }

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-repositories{    
+repositories{
     jcenter()
     mavenCentral()
     maven() { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
@@ -22,8 +22,8 @@ android {
 
 dependencies {
     compile (name:'AliyunPlayer-4.7.0-part', ext:'aar')
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:26+'
+    compile 'com.android.support:recyclerview-v7:26+'
 
     compile 'com.google.code.gson:gson:2.8.0'
 

@@ -15,7 +15,7 @@ public class PlayParameter {
      */
     public static  String PLAY_PARAM_TYPE = "localSource";
 
-    private static final String PLAY_PARAM_VID_DEFAULT = "9fb028c29acb421cb634c77cf4ebe078";
+    private static final String PLAY_PARAM_VID_DEFAULT = "09cf8b916ecc4613aa4a0044f70a06fd";
     /**
      * vid, 初始为: 9fb028c29acb421cb634c77cf4ebe078
      */
