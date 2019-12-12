@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.widget.AliyunVodPlayerView;
-import cn.com.Timekey.EasyHospital.R;
 
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
@@ -41,21 +40,29 @@ public class ReplayView extends RelativeLayout implements ITheme {
         init();
     }
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
     private void init() {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Resources resources = getContext().getResources();
 
-        View view = inflater.inflate(R.layout.alivc_dialog_replay, null);
-        int viewWidth = resources.getDimensionPixelSize(R.dimen.alivc_player_dialog_err_width);
-        int viewHeight = resources.getDimensionPixelSize(R.dimen.alivc_player_dialog_err_height);
+        View view = inflater.inflate(getResByCordova("layout", "alivc_dialog_replay"), null);
+        int viewWidth = resources.getDimensionPixelSize(getResByCordova("dimen", "alivc_player_dialog_err_width"));
+        int viewHeight = resources.getDimensionPixelSize(getResByCordova("dimen", "alivc_player_dialog_err_height"));
 
 
         LayoutParams params = new LayoutParams(viewWidth, viewHeight);
         addView(view, params);
 
         //设置监听
-        mReplayBtn = (TextView) view.findViewById(R.id.replay);
+        mReplayBtn = (TextView) view.findViewById(getResByCordova("id", "replay"));
         mReplayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,17 +78,17 @@ public class ReplayView extends RelativeLayout implements ITheme {
     public void setTheme(AliyunVodPlayerView.Theme theme) {
         //更新主题
         if (theme == AliyunVodPlayerView.Theme.Blue) {
-            mReplayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_blue);
-            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_blue));
+            mReplayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_blue"));
+            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_blue")));
         } else if (theme == AliyunVodPlayerView.Theme.Green) {
-            mReplayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_green);
-            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_green));
+            mReplayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_green"));
+            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_green")));
         } else if (theme == AliyunVodPlayerView.Theme.Orange) {
-            mReplayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_orange);
-            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_orange));
+            mReplayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_orange"));
+            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_orange")));
         } else if (theme == AliyunVodPlayerView.Theme.Red) {
-            mReplayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_red);
-            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_red));
+            mReplayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_red"));
+            mReplayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_red")));
         }
     }
 

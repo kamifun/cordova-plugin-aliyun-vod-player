@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.aliyun.player.nativeclass.MediaInfo;
 import com.aliyun.player.nativeclass.TrackInfo;
 import com.aliyun.utils.VcPlayerLog;
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.constants.PlayParameter;
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.utils.TimeFormater;
@@ -168,9 +167,17 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
         init();
     }
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
     private void init() {
         //Inflate布局
-        LayoutInflater.from(getContext()).inflate(R.layout.alivc_view_control, this, true);
+        LayoutInflater.from(getContext()).inflate(getResByCordova("layout", "alivc_view_control"), this, true);
         findAllViews(); //找到所有的view
 
         setViewListener(); //设置view的监听事件
@@ -179,29 +186,25 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
     }
 
     private void findAllViews() {
-        mTitleBar = findViewById(R.id.titlebar);
-        mControlBar = findViewById(R.id.controlbar);
+        mTitleBar = findViewById(getResByCordova("id", "titlebar"));
+        mControlBar = findViewById(getResByCordova("id", "controlbar"));
 
-        mTitlebarBackBtn = (ImageView) findViewById(R.id.alivc_title_back);
-        mTitlebarText = (TextView) findViewById(R.id.alivc_title_title);
-        // mTitleDownload = (ImageView) findViewById(R.id.alivc_title_download);
-        mTitleMore = (ImageView) findViewById(R.id.alivc_title_more);
-//        mScreenModeBtn = (ImageView) findViewById(R.id.alivc_screen_mode);
-        mScreenLockBtn = (ImageView) findViewById(R.id.alivc_screen_lock);
-        mPlayStateBtn = (ImageView) findViewById(R.id.alivc_player_state);
-        // mScreenShot = findViewById(R.id.alivc_screen_shot);
-        // mScreenRecorder = findViewById(R.id.alivc_screen_recoder);
+        mTitlebarBackBtn = (ImageView) findViewById(getResByCordova("id", "alivc_title_back"));
+        mTitlebarText = (TextView) findViewById(getResByCordova("id", "alivc_title_title"));
+        mTitleMore = (ImageView) findViewById(getResByCordova("id", "alivc_title_more"));
+        mScreenLockBtn = (ImageView) findViewById(getResByCordova("id", "alivc_screen_lock"));
+        mPlayStateBtn = (ImageView) findViewById(getResByCordova("id", "alivc_player_state"));
 
-        mLargeInfoBar = findViewById(R.id.alivc_info_large_bar);
-        mLargePositionText = (TextView) findViewById(R.id.alivc_info_large_position);
-        mLargeDurationText = (TextView) findViewById(R.id.alivc_info_large_duration);
-        mLargeSeekbar = (SeekBar) findViewById(R.id.alivc_info_large_seekbar);
-        mLargeChangeQualityBtn = (Button) findViewById(R.id.alivc_info_large_rate_btn);
+        mLargeInfoBar = findViewById(getResByCordova("id", "alivc_info_large_bar"));
+        mLargePositionText = (TextView) findViewById(getResByCordova("id", "alivc_info_large_position"));
+        mLargeDurationText = (TextView) findViewById(getResByCordova("id", "alivc_info_large_duration"));
+        mLargeSeekbar = (SeekBar) findViewById(getResByCordova("id", "alivc_info_large_seekbar"));
+        mLargeChangeQualityBtn = (Button) findViewById(getResByCordova("id", "alivc_info_large_rate_btn"));
 
-        mSmallInfoBar = findViewById(R.id.alivc_info_small_bar);
-        mSmallPositionText = (TextView) findViewById(R.id.alivc_info_small_position);
-        mSmallDurationText = (TextView) findViewById(R.id.alivc_info_small_duration);
-        mSmallSeekbar = (SeekBar) findViewById(R.id.alivc_info_small_seekbar);
+        mSmallInfoBar = findViewById(getResByCordova("id", "alivc_info_small_bar"));
+        mSmallPositionText = (TextView) findViewById(getResByCordova("id", "alivc_info_small_position"));
+        mSmallDurationText = (TextView) findViewById(getResByCordova("id", "alivc_info_small_duration"));
+        mSmallSeekbar = (SeekBar) findViewById(getResByCordova("id", "alivc_info_small_seekbar"));
     }
 
     private void setViewListener() {
@@ -523,20 +526,20 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      */
     private void updateSeekBarTheme(AliyunVodPlayerView.Theme theme) {
         //获取不同主题的图片
-        int progressDrawableResId = R.drawable.alivc_info_seekbar_bg_blue;
-        int thumbResId = R.drawable.alivc_info_seekbar_thumb_blue;
+        int progressDrawableResId = getResByCordova("drawable", "alivc_info_seekbar_bg_blue");
+        int thumbResId = getResByCordova("drawable", "alivc_info_seekbar_thumb_blue");
         if (theme == AliyunVodPlayerView.Theme.Blue) {
-            progressDrawableResId = (R.drawable.alivc_info_seekbar_bg_blue);
-            thumbResId = (R.drawable.alivc_seekbar_thumb_blue);
+            progressDrawableResId = (getResByCordova("drawable", "alivc_info_seekbar_bg_blue"));
+            thumbResId = (getResByCordova("drawable", "alivc_seekbar_thumb_blue"));
         } else if (theme == AliyunVodPlayerView.Theme.Green) {
-            progressDrawableResId = (R.drawable.alivc_info_seekbar_bg_green);
-            thumbResId = (R.drawable.alivc_info_seekbar_thumb_green);
+            progressDrawableResId = (getResByCordova("drawable", "alivc_info_seekbar_bg_green"));
+            thumbResId = (getResByCordova("drawable", "alivc_info_seekbar_thumb_green"));
         } else if (theme == AliyunVodPlayerView.Theme.Orange) {
-            progressDrawableResId = (R.drawable.alivc_info_seekbar_bg_orange);
-            thumbResId = (R.drawable.alivc_info_seekbar_thumb_orange);
+            progressDrawableResId = (getResByCordova("drawable", "alivc_info_seekbar_bg_orange"));
+            thumbResId = (getResByCordova("drawable", "alivc_info_seekbar_thumb_orange"));
         } else if (theme == AliyunVodPlayerView.Theme.Red) {
-            progressDrawableResId = (R.drawable.alivc_info_seekbar_bg_red);
-            thumbResId = (R.drawable.alivc_info_seekbar_thumb_red);
+            progressDrawableResId = (getResByCordova("drawable", "alivc_info_seekbar_bg_red"));
+            thumbResId = (getResByCordova("drawable", "alivc_info_seekbar_thumb_red"));
         }
 
 
@@ -741,9 +744,9 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      */
     private void updateScreenLockBtn() {
         if (mScreenLocked) {
-            mScreenLockBtn.setImageResource(R.drawable.alivc_screen_lock);
+            mScreenLockBtn.setImageResource(getResByCordova("drawable", "alivc_screen_lock"));
         } else {
-            mScreenLockBtn.setImageResource(R.drawable.alivc_screen_unlock);
+            mScreenLockBtn.setImageResource(getResByCordova("drawable", "alivc_screen_unlock"));
         }
 
         if (mAliyunScreenMode == AliyunScreenMode.Full) {
@@ -764,9 +767,9 @@ public class ControlView extends RelativeLayout implements ViewAction, ITheme {
      */
     private void updatePlayStateBtn() {
         if (mPlayState == PlayState.NotPlaying) {
-            mPlayStateBtn.setImageResource(R.drawable.alivc_playstate_play);
+            mPlayStateBtn.setImageResource(getResByCordova("drawable", "alivc_playstate_play"));
         } else if (mPlayState == PlayState.Playing) {
-            mPlayStateBtn.setImageResource(R.drawable.alivc_playstate_pause);
+            mPlayStateBtn.setImageResource(getResByCordova("drawable", "alivc_playstate_pause"));
         }
     }
 

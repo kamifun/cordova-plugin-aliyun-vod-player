@@ -15,7 +15,6 @@ import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.utils.ScreenUtils;
 import com.aliyun.vodplayerview.widget.AliyunScreenMode;
 
@@ -35,7 +34,7 @@ public class AlivcShowMoreDialog extends Dialog {
 
 
     public AlivcShowMoreDialog(Context context, AliyunScreenMode aliyunScreenMode) {
-        super(context, R.style.addDownloadDialog);
+        super(context, context.getResources().getIdentifier("addDownloadDialog", "style", context.getPackageName()));
         this.screenMode = aliyunScreenMode;
         activityWeakReference = new WeakReference<Context>(context);
     }

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import cn.com.Timekey.EasyHospital.R;
 
 
 
@@ -26,20 +25,30 @@ public class BaseGestureDialog extends PopupWindow {
     ImageView mImageView;
     //对话框的宽高
     private int mDialogWidthAndHeight;
+    private Context context;
+
+    private Context getApplicationContext() {
+        return context;
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
 
     public BaseGestureDialog(Context context) {
+        this.context = context;
         //使用同一个布局
         LayoutInflater mInflater = (LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = mInflater.inflate(R.layout.alivc_dialog_gesture, null);
+        View view = mInflater.inflate(getResByCordova("layout", "alivc_dialog_gesture"), null);
         view.measure(0, 0);
         setContentView(view);
 
         //找出view
-        mTextView = (TextView) view.findViewById(R.id.gesture_text);
-        mImageView = (ImageView) view.findViewById(R.id.gesture_image);
+        mTextView = (TextView) view.findViewById(getResByCordova("id", "gesture_text"));
+        mImageView = (ImageView) view.findViewById(getResByCordova("id", "gesture_image"));
 
         //设置对话框宽高
-        mDialogWidthAndHeight = context.getResources().getDimensionPixelSize(R.dimen.alivc_player_gesture_dialog_size);
+        mDialogWidthAndHeight = context.getResources().getDimensionPixelSize(getResByCordova("dimen", "alivc_player_gesture_dialog_size"));
         setWidth(mDialogWidthAndHeight);
         setHeight(mDialogWidthAndHeight);
     }

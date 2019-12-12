@@ -20,7 +20,6 @@ import com.aliyun.player.nativeclass.TrackInfo;
 import com.aliyun.vodplayerview.listener.QualityValue;
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.widget.AliyunVodPlayerView;
-import cn.com.Timekey.EasyHospital.R;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -47,8 +46,15 @@ public class QualityView extends FrameLayout implements ITheme {
     //是否是mts源
     private boolean isMtsSource = false;
     //默认的主题色
-    private int themeColorResId = R.color.alivc_player_theme_blue;
+    private int themeColorResId = getResByCordova("color", "alivc_player_theme_blue");
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
 
     public QualityView(@NonNull Context context) {
         super(context);
@@ -68,8 +74,8 @@ public class QualityView extends FrameLayout implements ITheme {
 
     private void init() {
         //初始化布局
-        LayoutInflater.from(getContext()).inflate(R.layout.alivc_view_quality, this, true);
-        mListView = (ListView) findViewById(R.id.quality_view);
+        LayoutInflater.from(getContext()).inflate(getResByCordova("layout", "alivc_view_quality"), this, true);
+        mListView = (ListView) findViewById(getResByCordova("id", "quality_view"));
 
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         //不显示滚动条，保证全部被显示
@@ -97,15 +103,15 @@ public class QualityView extends FrameLayout implements ITheme {
     public void setTheme(AliyunVodPlayerView.Theme theme) {
         //更新主题
         if (theme == AliyunVodPlayerView.Theme.Blue) {
-            themeColorResId = R.color.alivc_player_theme_blue;
+            themeColorResId = getResByCordova("color", "alivc_player_theme_blue");
         } else if (theme == AliyunVodPlayerView.Theme.Green) {
-            themeColorResId = R.color.alivc_player_theme_green;
+            themeColorResId = getResByCordova("color", "alivc_player_theme_green");
         } else if (theme == AliyunVodPlayerView.Theme.Orange) {
-            themeColorResId = R.color.alivc_player_theme_orange;
+            themeColorResId = getResByCordova("color", "alivc_player_theme_orange");
         } else if (theme == AliyunVodPlayerView.Theme.Red) {
-            themeColorResId = R.color.alivc_player_theme_red;
+            themeColorResId = getResByCordova("color", "alivc_player_theme_red");
         } else {
-            themeColorResId = R.color.alivc_player_theme_blue;
+            themeColorResId = getResByCordova("color", "alivc_player_theme_blue");
         }
 
         if (mAdapter != null) {
@@ -253,7 +259,7 @@ public class QualityView extends FrameLayout implements ITheme {
 
         FrameLayout.LayoutParams listViewParam = (LayoutParams) mListView.getLayoutParams();
         listViewParam.width = anchor.getWidth();
-        listViewParam.height = getResources().getDimensionPixelSize(R.dimen.alivc_player_rate_item_height) * mQualityItems.size();
+        listViewParam.height = getResources().getDimensionPixelSize(getResByCordova("dimen", "alivc_player_rate_item_height")) * mQualityItems.size();
         int[] location = new int[2];
         anchor.getLocationInWindow(location);
         listViewParam.leftMargin = location[0];
@@ -321,7 +327,7 @@ public class QualityView extends FrameLayout implements ITheme {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.ratetype_item, null);
+            TextView view = (TextView) LayoutInflater.from(getContext()).inflate(getResByCordova("layout", "ratetype_item"), null);
             if (mQualityItems != null) {
                 TrackInfo trackInfo = mQualityItems.get(position);
                 String quality = trackInfo.getVodDefinition();
@@ -330,7 +336,7 @@ public class QualityView extends FrameLayout implements ITheme {
                 if (quality.equals(currentQuality)) {
                     view.setTextColor(ContextCompat.getColor(getContext(), themeColorResId));
                 } else {
-                    view.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_common_font_white_light));
+                    view.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_common_font_white_light")));
                 }
             }
             return view;

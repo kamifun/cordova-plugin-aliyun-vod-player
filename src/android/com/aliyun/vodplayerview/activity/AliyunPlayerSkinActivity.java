@@ -46,7 +46,6 @@ import com.aliyun.player.source.VidSts;
 import com.aliyun.private_service.PrivateService;
 import com.aliyun.svideo.common.utils.ToastUtils;
 import com.aliyun.utils.VcPlayerLog;
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.constants.PlayParameter;
 import com.aliyun.vodplayerview.listener.OnChangeQualityListener;
 import com.aliyun.vodplayerview.listener.OnStoppedListener;
@@ -111,16 +110,20 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
      */
     private boolean mIsTimeExpired = false;
 
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (isStrangePhone()) {
             //            setTheme(R.style.ActTheme);
         } else {
-            setTheme(R.style.NoActionTheme);
+            setTheme(getResByCordova("style", "NoActionTheme"));
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.alivc_player_layout_skin);
+        setContentView(getResByCordova("layout", "alivc_player_layout_skin"));
 
         PlayParameter.PLAY_PARAM_TYPE = getIntent().getStringExtra("playType");
         PlayParameter.PLAY_PARAM_URL = getIntent().getStringExtra("videoPath");
@@ -142,7 +145,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
 
 
     private void initAliyunPlayerView() {
-        mAliyunVodPlayerView = (AliyunVodPlayerView) findViewById(R.id.video_view);
+        mAliyunVodPlayerView = (AliyunVodPlayerView) findViewById(getResByCordova("id", "video_view"));
         //保持屏幕敞亮
         mAliyunVodPlayerView.setKeepScreenOn(true);
         String sdDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test_save_cache";
@@ -360,13 +363,13 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
     private void onChangeQualitySuccess(String finalQuality) {
         // logStrs.add(format.format(new Date()) + getString(R.string.log_change_quality_success));
         FixedToastUtils.show(AliyunPlayerSkinActivity.this.getApplicationContext(),
-                getString(R.string.log_change_quality_success));
+                getString(getResByCordova("string", "log_change_quality_success")));
     }
 
     void onChangeQualityFail(int code, String msg) {
         // logStrs.add(format.format(new Date()) + getString(R.string.log_change_quality_fail) + " : " + msg);
         FixedToastUtils.show(AliyunPlayerSkinActivity.this.getApplicationContext(),
-                getString(R.string.log_change_quality_fail));
+                getString(getResByCordova("string", "log_change_quality_fail")));
     }
 
     private static class MyStoppedListener implements OnStoppedListener {
@@ -405,7 +408,7 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
     }
 
     private void onStopped() {
-        FixedToastUtils.show(AliyunPlayerSkinActivity.this.getApplicationContext(), R.string.log_play_stopped);
+        FixedToastUtils.show(AliyunPlayerSkinActivity.this.getApplicationContext(), getResByCordova("string", "log_play_stopped"));
     }
 
     private void setPlaySource() {
@@ -805,13 +808,13 @@ public class AliyunPlayerSkinActivity extends BaseActivity {
             @Override
             public void onSpeedChanged(RadioGroup group, int checkedId) {
                 // 点击速度切换
-                if (checkedId == R.id.rb_speed_normal) {
+                if (checkedId == getResByCordova("id", "rb_speed_normal")) {
                     mAliyunVodPlayerView.changeSpeed(SpeedValue.One);
-                } else if (checkedId == R.id.rb_speed_onequartern) {
+                } else if (checkedId == getResByCordova("id", "rb_speed_onequartern")) {
                     mAliyunVodPlayerView.changeSpeed(SpeedValue.OneQuartern);
-                } else if (checkedId == R.id.rb_speed_onehalf) {
+                } else if (checkedId == getResByCordova("id", "rb_speed_onehalf")) {
                     mAliyunVodPlayerView.changeSpeed(SpeedValue.OneHalf);
-                } else if (checkedId == R.id.rb_speed_twice) {
+                } else if (checkedId == getResByCordova("id", "rb_speed_twice")) {
                     mAliyunVodPlayerView.changeSpeed(SpeedValue.Twice);
                 }
 

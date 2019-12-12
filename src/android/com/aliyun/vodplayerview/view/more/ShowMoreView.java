@@ -11,7 +11,6 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.activity.AliyunPlayerSkinActivity;
 import com.aliyun.vodplayerview.widget.AliyunScreenMode;
 
@@ -40,21 +39,30 @@ public class ShowMoreView extends LinearLayout implements View.OnClickListener,R
     }
 
     private void init() {
-        View view = LayoutInflater.from(context).inflate(R.layout.alivc_dialog_more, this, true);
+        View view = LayoutInflater.from(context).inflate(getResByCordova("layout", "alivc_dialog_more"), this, true);
         findAllViews(view);
     }
 
     private void findAllViews(View view) {
-        seekLight = (SeekBar) view.findViewById(R.id.seek_light);
-        seekVoice = (SeekBar) view.findViewById(R.id.seek_voice);
+        seekLight = (SeekBar) view.findViewById(getResByCordova("id", "seek_light"));
+        seekVoice = (SeekBar) view.findViewById(getResByCordova("id", "seek_voice"));
         // tvDonwload = view.findViewById(R.id.tv_download);
         // tvCastScreen = view.findViewById(R.id.tv_cast_screen);
         // tvBarrage = view.findViewById(R.id.tv_barrage);
-        rgSpeed = (RadioGroup) findViewById(R.id.alivc_rg_speed);
+        rgSpeed = (RadioGroup) findViewById(getResByCordova("id", "alivc_rg_speed"));
         configViews();
         addListener();
 
     }
+
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
 
     private void configViews() {
         if (moreValue == null){

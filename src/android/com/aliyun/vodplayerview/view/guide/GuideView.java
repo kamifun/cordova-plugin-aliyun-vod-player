@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.widget.AliyunScreenMode;
 import com.aliyun.vodplayerview.widget.AliyunVodPlayerView;
-import cn.com.Timekey.EasyHospital.R;
 
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
@@ -46,17 +45,25 @@ public class GuideView extends LinearLayout implements ITheme {
         init();
     }
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
     private void init() {
         //设置页面布局
         setBackgroundColor(Color.parseColor("#88000000"));
         setGravity(Gravity.CENTER);
         setOrientation(VERTICAL);
-        LayoutInflater.from(getContext()).inflate(R.layout.alivc_view_guide, this, true);
+        LayoutInflater.from(getContext()).inflate(getResByCordova("layout", "alivc_view_guide"), this, true);
 
         //这几个文字有颜色的变化
-        mBrightText = (TextView) findViewById(R.id.bright_text);
-        mProgressText = (TextView) findViewById(R.id.progress_text);
-        mVolumeText = (TextView) findViewById(R.id.volume_text);
+        mBrightText = (TextView) findViewById(getResByCordova("id", "bright_text"));
+        mProgressText = (TextView) findViewById(getResByCordova("id", "progress_text"));
+        mVolumeText = (TextView) findViewById(getResByCordova("id", "volume_text"));
 
         //默认是隐藏的
         hide();
@@ -114,16 +121,16 @@ public class GuideView extends LinearLayout implements ITheme {
      */
     @Override
     public void setTheme(AliyunVodPlayerView.Theme theme) {
-        int colorRes = R.color.alivc_player_theme_blue;
+        int colorRes = getResByCordova("color", "alivc_player_theme_blue");
 
         if (theme == AliyunVodPlayerView.Theme.Blue) {
-            colorRes = R.color.alivc_player_theme_blue;
+            colorRes = getResByCordova("color", "alivc_player_theme_blue");
         } else if (theme == AliyunVodPlayerView.Theme.Green) {
-            colorRes = R.color.alivc_player_theme_green;
+            colorRes = getResByCordova("color", "alivc_player_theme_green");
         } else if (theme == AliyunVodPlayerView.Theme.Orange) {
-            colorRes = R.color.alivc_player_theme_orange;
+            colorRes = getResByCordova("color", "alivc_player_theme_orange");
         } else if (theme == AliyunVodPlayerView.Theme.Red) {
-            colorRes = R.color.alivc_player_theme_red;
+            colorRes = getResByCordova("color", "alivc_player_theme_red");
         }
 
         int color = ContextCompat.getColor(getContext(), colorRes);

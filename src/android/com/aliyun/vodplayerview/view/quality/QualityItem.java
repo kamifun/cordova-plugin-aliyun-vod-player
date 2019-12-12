@@ -2,8 +2,6 @@ package com.aliyun.vodplayerview.view.quality;
 
 import android.content.Context;
 
-import cn.com.Timekey.EasyHospital.R;
-
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
  */

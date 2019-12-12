@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 
 import com.aliyun.player.bean.ErrorCode;
 import com.aliyun.utils.VcPlayerLog;
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.widget.AliyunVodPlayerView;
 

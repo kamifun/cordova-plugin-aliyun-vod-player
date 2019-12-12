@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.aliyun.svideo.common.utils.DensityUtils;
-import cn.com.Timekey.EasyHospital.R;
 
 /**
  * 用于展示视频广告的seekBar
@@ -61,17 +60,25 @@ public class MutiSeekBarView extends android.support.v7.widget.AppCompatSeekBar 
     /**
      * 原视频进度条颜色,默认白色
      */
-    private int mSourceSeekColor = getResources().getColor(R.color.alivc_common_font_white_light);
+    private int mSourceSeekColor = getResources().getColor(getResByCordova("color", "alivc_common_font_white_light"));
 
     /**
      * 视频进度条颜色,默认蓝色
      */
-    private int mAdvSeekColor = getResources().getColor(R.color.alivc_player_theme_blue);
+    private int mAdvSeekColor = getResources().getColor(getResByCordova("color", "alivc_player_theme_blue"));
     private int mAdvWidth;
     private int mSourceWidth;
     private int mPaddingRight;
     private int mPaddingLeft;
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
 
     public MutiSeekBarView(Context context) {
         super(context);

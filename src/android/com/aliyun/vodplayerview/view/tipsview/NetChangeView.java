@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.widget.AliyunVodPlayerView;
 
@@ -41,20 +40,28 @@ public class NetChangeView extends RelativeLayout implements ITheme {
         init();
     }
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
     private void init() {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Resources resources = getContext().getResources();
 
-        View view = inflater.inflate(R.layout.alivc_dialog_netchange, null);
-        int viewWidth = resources.getDimensionPixelSize(R.dimen.alivc_player_dialog_netchange_width);
-        int viewHeight = resources.getDimensionPixelSize(R.dimen.alivc_player_dialog_netchange_height);
+        View view = inflater.inflate(getResByCordova("layout", "alivc_dialog_netchange"), null);
+        int viewWidth = resources.getDimensionPixelSize(getResByCordova("dimen", "alivc_player_dialog_netchange_width"));
+        int viewHeight = resources.getDimensionPixelSize(getResByCordova("dimen", "alivc_player_dialog_netchange_height"));
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(viewWidth, viewHeight);
         addView(view, params);
 
         //继续播放的点击事件
-        view.findViewById(R.id.continue_play).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(getResByCordova("id", "continue_play")).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnNetChangeClickListener != null) {
@@ -64,7 +71,7 @@ public class NetChangeView extends RelativeLayout implements ITheme {
         });
 
         //停止播放的点击事件
-        mStopPlayBtn = (TextView) view.findViewById(R.id.stop_play);
+        mStopPlayBtn = (TextView) view.findViewById(getResByCordova("id", "stop_play"));
         mStopPlayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,17 +86,17 @@ public class NetChangeView extends RelativeLayout implements ITheme {
     public void setTheme(AliyunVodPlayerView.Theme theme) {
         //更新停止播放按钮的主题
         if (theme == AliyunVodPlayerView.Theme.Blue) {
-            mStopPlayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_blue);
-            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_blue));
+            mStopPlayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_blue"));
+            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_blue")));
         } else if (theme == AliyunVodPlayerView.Theme.Green) {
-            mStopPlayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_green);
-            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_green));
+            mStopPlayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_green"));
+            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_green")));
         } else if (theme == AliyunVodPlayerView.Theme.Orange) {
-            mStopPlayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_orange);
-            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_orange));
+            mStopPlayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_orange"));
+            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_orange")));
         } else if (theme == AliyunVodPlayerView.Theme.Red) {
-            mStopPlayBtn.setBackgroundResource(R.drawable.alivc_rr_bg_red);
-            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_red));
+            mStopPlayBtn.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_red"));
+            mStopPlayBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_red")));
         }
     }
 

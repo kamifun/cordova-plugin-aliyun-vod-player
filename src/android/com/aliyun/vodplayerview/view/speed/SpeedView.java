@@ -20,7 +20,6 @@ import com.aliyun.vodplayerview.listener.LockPortraitListener;
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.widget.AliyunScreenMode;
 import com.aliyun.vodplayerview.widget.AliyunVodPlayerView;
-import cn.com.Timekey.EasyHospital.R;
 
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
@@ -63,9 +62,17 @@ public class SpeedView extends RelativeLayout implements ITheme {
     //倍速是否变化
     private boolean mSpeedChanged = false;
     //选中的倍速的指示点的方块
-    private int mSpeedDrawable = R.drawable.alivc_speed_dot_blue;
+    private int mSpeedDrawable = getResByCordova("drawable", "alivc_speed_dot_blue");
     //选中的倍速的指示点的文字
-    private int mSpeedTextColor = R.color.alivc_player_theme_blue;
+    private int mSpeedTextColor = getResByCordova("color", "alivc_player_theme_blue");
+
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
 
     public SpeedView(Context context) {
         super(context);
@@ -85,17 +92,17 @@ public class SpeedView extends RelativeLayout implements ITheme {
 
     private void init() {
         //初始化布局
-        LayoutInflater.from(getContext()).inflate(R.layout.alivc_view_speed, this, true);
-        mMainSpeedView = findViewById(R.id.speed_view);
+        LayoutInflater.from(getContext()).inflate(getResByCordova("layout", "alivc_view_speed"), this, true);
+        mMainSpeedView = findViewById(getResByCordova("id", "speed_view"));
         mMainSpeedView.setVisibility(INVISIBLE);
 
         //找出控件
-        mOneQrtTimeBtn = (RadioButton) findViewById(R.id.one_quartern);
-        mNormalBtn = (RadioButton) findViewById(R.id.normal);
-        mOneHalfTimeBtn = (RadioButton) findViewById(R.id.one_half);
-        mTwoTimeBtn = (RadioButton) findViewById(R.id.two);
+        mOneQrtTimeBtn = (RadioButton) findViewById(getResByCordova("id", "one_quartern"));
+        mNormalBtn = (RadioButton) findViewById(getResByCordova("id", "normal"));
+        mOneHalfTimeBtn = (RadioButton) findViewById(getResByCordova("id", "one_half"));
+        mTwoTimeBtn = (RadioButton) findViewById(getResByCordova("id", "two"));
 
-        mSpeedTip = (TextView) findViewById(R.id.speed_tip);
+        mSpeedTip = (TextView) findViewById(getResByCordova("id", "speed_tip"));
         mSpeedTip.setVisibility(INVISIBLE);
 
         //对每个倍速项做点击监听
@@ -105,8 +112,8 @@ public class SpeedView extends RelativeLayout implements ITheme {
         mTwoTimeBtn.setOnClickListener(mClickListener);
 
         //倍速view使用到的动画
-        showAnim = AnimationUtils.loadAnimation(getContext(), R.anim.view_speed_show);
-        hideAnim = AnimationUtils.loadAnimation(getContext(), R.anim.view_speed_hide);
+        showAnim = AnimationUtils.loadAnimation(getContext(), getResByCordova("anim", "view_speed_show"));
+        hideAnim = AnimationUtils.loadAnimation(getContext(), getResByCordova("anim", "view_speed_hide"));
         showAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -144,15 +151,15 @@ public class SpeedView extends RelativeLayout implements ITheme {
                 if (mSpeedChanged) {
                     String times = "";
                     if (mSpeedValue == SpeedValue.OneQuartern) {
-                        times = getResources().getString(R.string.alivc_speed_optf_times);
+                        times = getResources().getString(getResByCordova("string", "alivc_speed_optf_times"));
                     } else if (mSpeedValue == SpeedValue.Normal) {
-                        times = getResources().getString(R.string.alivc_speed_one_times);
+                        times = getResources().getString(getResByCordova("string", "alivc_speed_one_times"));
                     } else if (mSpeedValue == SpeedValue.OneHalf) {
-                        times = getResources().getString(R.string.alivc_speed_opt_times);
+                        times = getResources().getString(getResByCordova("string", "alivc_speed_opt_times"));
                     } else if (mSpeedValue == SpeedValue.Twice) {
-                        times = getResources().getString(R.string.alivc_speed_twice_times);
+                        times = getResources().getString(getResByCordova("string", "alivc_speed_twice_times"));
                     }
-                    String tips = getContext().getString(R.string.alivc_speed_tips, times);
+                    String tips = getContext().getString(getResByCordova("string", "alivc_speed_tips"), times);
                     mSpeedTip.setText(tips);
                     mSpeedTip.setVisibility(VISIBLE);
                     mSpeedTip.postDelayed(new Runnable() {
@@ -185,21 +192,21 @@ public class SpeedView extends RelativeLayout implements ITheme {
     @Override
     public void setTheme(AliyunVodPlayerView.Theme theme) {
 
-        mSpeedDrawable = R.drawable.alivc_speed_dot_blue;
-        mSpeedTextColor = R.color.alivc_player_theme_blue;
+        mSpeedDrawable = getResByCordova("drawable", "alivc_speed_dot_blue");
+        mSpeedTextColor = getResByCordova("color", "alivc_player_theme_blue");
         //根据主题变化对应的颜色
         if (theme == AliyunVodPlayerView.Theme.Blue) {
-            mSpeedDrawable = R.drawable.alivc_speed_dot_blue;
-            mSpeedTextColor = R.color.alivc_player_theme_blue;
+            mSpeedDrawable = getResByCordova("drawable", "alivc_speed_dot_blue");
+            mSpeedTextColor = getResByCordova("color", "alivc_player_theme_blue");
         } else if (theme == AliyunVodPlayerView.Theme.Green) {
-            mSpeedDrawable = R.drawable.alivc_speed_dot_green;
-            mSpeedTextColor = R.color.alivc_player_theme_green;
+            mSpeedDrawable = getResByCordova("drawable", "alivc_speed_dot_green");
+            mSpeedTextColor = getResByCordova("color", "alivc_player_theme_green");
         } else if (theme == AliyunVodPlayerView.Theme.Orange) {
-            mSpeedDrawable = R.drawable.alivc_speed_dot_orange;
-            mSpeedTextColor = R.color.alivc_player_theme_orange;
+            mSpeedDrawable = getResByCordova("drawable", "alivc_speed_dot_orange");
+            mSpeedTextColor = getResByCordova("color", "alivc_player_theme_orange");
         } else if (theme == AliyunVodPlayerView.Theme.Red) {
-            mSpeedDrawable = R.drawable.alivc_speed_dot_red;
-            mSpeedTextColor = R.color.alivc_player_theme_red;
+            mSpeedDrawable = getResByCordova("drawable", "alivc_speed_dot_red");
+            mSpeedTextColor = getResByCordova("color", "alivc_player_theme_red");
         }
 
         updateBtnTheme();
@@ -214,7 +221,7 @@ public class SpeedView extends RelativeLayout implements ITheme {
             button.setTextColor(ContextCompat.getColor(getContext(),mSpeedTextColor));
         } else {
             button.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-            button.setTextColor(ContextCompat.getColor(getContext(),R.color.alivc_common_font_white_light));
+            button.setTextColor(ContextCompat.getColor(getContext(),getResByCordova("color", "alivc_common_font_white_light")));
         }
     }
 

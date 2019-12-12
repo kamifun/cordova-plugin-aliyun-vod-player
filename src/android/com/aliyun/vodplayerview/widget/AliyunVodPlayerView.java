@@ -35,7 +35,6 @@ import com.aliyun.svideo.common.utils.DensityUtils;
 import com.aliyun.thumbnail.ThumbnailBitmapInfo;
 import com.aliyun.thumbnail.ThumbnailHelper;
 import com.aliyun.utils.VcPlayerLog;
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.constants.PlayParameter;
 import com.aliyun.vodplayerview.listener.LockPortraitListener;
 import com.aliyun.vodplayerview.listener.OnAutoPlayListener;
@@ -193,6 +192,14 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     public AliyunVodPlayerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initVideoView();
+    }
+
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
     }
 
     /**
@@ -700,7 +707,7 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme {
     private void initCoverView() {
         mCoverView = new ImageView(getContext());
         //这个是为了给自动化测试用的id
-        mCoverView.setId(R.id.custom_id_min);
+        mCoverView.setId(getResByCordova("id", "custom_id_min"));
         addSubView(mCoverView);
     }
 

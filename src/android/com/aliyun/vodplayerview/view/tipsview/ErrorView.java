@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.aliyun.vodplayerview.theme.ITheme;
 import com.aliyun.vodplayerview.widget.AliyunVodPlayerView;
-import cn.com.Timekey.EasyHospital.R;
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
  */
@@ -49,23 +48,31 @@ public class ErrorView extends RelativeLayout implements ITheme {
         init();
     }
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
     private void init() {
         LayoutInflater inflater = (LayoutInflater) getContext()
                                   .getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Resources resources = getContext().getResources();
 
-        View view = inflater.inflate(R.layout.alivc_dialog_error, null);
+        View view = inflater.inflate(getResByCordova("layout", "alivc_dialog_error"), null);
 
-        int viewWidth = resources.getDimensionPixelSize(R.dimen.alivc_player_dialog_err_width);
-        int viewHeight = resources.getDimensionPixelSize(R.dimen.alivc_player_dialog_err_height);
+        int viewWidth = resources.getDimensionPixelSize(getResByCordova("dimen", "alivc_player_dialog_err_width"));
+        int viewHeight = resources.getDimensionPixelSize(getResByCordova("dimen", "alivc_player_dialog_err_height"));
 
         LayoutParams params = new LayoutParams(viewWidth, viewHeight);
         addView(view, params);
 
-        mRetryBtn = (TextView) view.findViewById(R.id.retry_btn);
-        mMsgView = (TextView) view.findViewById(R.id.msg);
-        mCodeView = (TextView) view.findViewById(R.id.code);
-        mRetryView = view.findViewById(R.id.retry);
+        mRetryBtn = (TextView) view.findViewById(getResByCordova("id", "retry_btn"));
+        mMsgView = (TextView) view.findViewById(getResByCordova("id", "msg"));
+        mCodeView = (TextView) view.findViewById(getResByCordova("id", "code"));
+        mRetryView = view.findViewById(getResByCordova("id", "retry"));
         //重试的点击监听
         mRetryView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +93,7 @@ public class ErrorView extends RelativeLayout implements ITheme {
      */
     public void updateTips(int errorCode, String errorEvent, String errMsg) {
         mMsgView.setText(errMsg);
-        mCodeView.setText(getContext().getString(R.string.alivc_error_code) + errorCode + " - " + errorEvent);
+        mCodeView.setText(getContext().getString(getResByCordova("string", "alivc_error_code")) + errorCode + " - " + errorEvent);
     }
 
     /**
@@ -104,22 +111,22 @@ public class ErrorView extends RelativeLayout implements ITheme {
     @Override
     public void setTheme(AliyunVodPlayerView.Theme theme) {
         if (theme == AliyunVodPlayerView.Theme.Blue) {
-            mRetryView.setBackgroundResource(R.drawable.alivc_rr_bg_blue);
-            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.alivc_refresh_blue, 0, 0, 0);
-            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_blue));
+            mRetryView.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_blue"));
+            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(getResByCordova("drawable", "alivc_refresh_blue"), 0, 0, 0);
+            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_blue")));
         } else if (theme == AliyunVodPlayerView.Theme.Green) {
-            mRetryView.setBackgroundResource(R.drawable.alivc_rr_bg_green);
-            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.alivc_refresh_green, 0, 0, 0);
-            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_green));
+            mRetryView.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_green"));
+            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(getResByCordova("drawable", "alivc_refresh_green"), 0, 0, 0);
+            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_green")));
         } else if (theme == AliyunVodPlayerView.Theme.Orange) {
-            mRetryView.setBackgroundResource(R.drawable.alivc_rr_bg_orange);
-            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.alivc_refresh_orange, 0, 0, 0);
-            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_orange));
+            mRetryView.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_orange"));
+            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(getResByCordova("drawable", "alivc_refresh_orange"), 0, 0, 0);
+            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_orange")));
         } else if (theme == AliyunVodPlayerView.Theme.Red) {
-            mRetryView.setBackgroundResource(R.drawable.alivc_rr_bg_red);
+            mRetryView.setBackgroundResource(getResByCordova("drawable", "alivc_rr_bg_red"));
             //这个重试图片是白色。。很尴尬
-            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.alivc_refresh_red, 0, 0, 0);
-            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.alivc_player_theme_red));
+            mRetryBtn.setCompoundDrawablesWithIntrinsicBounds(getResByCordova("drawable", "alivc_refresh_red"), 0, 0, 0);
+            mRetryBtn.setTextColor(ContextCompat.getColor(getContext(), getResByCordova("color", "alivc_player_theme_red")));
         }
     }
 

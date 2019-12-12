@@ -1,8 +1,8 @@
 package com.aliyun.vodplayerview.view.gesturedialog;
 
 import android.app.Activity;
+import android.content.Context;
 
-import cn.com.Timekey.EasyHospital.R;
 import com.aliyun.vodplayerview.utils.TimeFormater;
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
@@ -15,9 +15,19 @@ public class SeekDialog extends BaseGestureDialog {
 
     private int mInitPosition = 0;
     private int mFinalPosition = 0;
+    private Context context;
+
+    private Context getApplicationContext() {
+        return context;
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
 
     public SeekDialog(Activity activity, int position) {
         super(activity);
+        this.context = activity;
         mInitPosition = position;
         updatePosition(mInitPosition);
     }
@@ -25,9 +35,9 @@ public class SeekDialog extends BaseGestureDialog {
     public void updatePosition(int position) {
         //这里更新了网签和往后seek的图片
         if (position >= mInitPosition) {
-            mImageView.setImageResource(R.drawable.alivc_seek_forward);
+            mImageView.setImageResource(getResByCordova("drawable", "alivc_seek_forward"));
         } else {
-            mImageView.setImageResource(R.drawable.alivc_seek_rewind);
+            mImageView.setImageResource(getResByCordova("drawable", "alivc_seek_rewind"));
         }
         mTextView.setText(TimeFormater.formatMs(position));
     }

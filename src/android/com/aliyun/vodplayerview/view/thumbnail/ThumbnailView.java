@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import cn.com.Timekey.EasyHospital.R;
-
 /**
  * 缩略图View
  */
@@ -42,16 +40,24 @@ public class ThumbnailView extends LinearLayout {
         init();
     }
 
+    private Context getApplicationContext() {
+        return getContext();
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
+
     private void init() {
         //Inflate布局
-        LayoutInflater.from(getContext()).inflate(R.layout.alivc_view_thumbnail, this, true);
+        LayoutInflater.from(getContext()).inflate(getResByCordova("layout", "alivc_view_thumbnail"), this, true);
         findAllViews();
 
     }
 
      private void findAllViews() {
-        mPositionTextView = (TextView) findViewById(R.id.tv_position);
-        mDurationTextView = (TextView) findViewById(R.id.tv_duration);
+        mPositionTextView = (TextView) findViewById(getResByCordova("id", "tv_position"));
+        mDurationTextView = (TextView) findViewById(getResByCordova("id", "tv_duration"));
 //        mThumbnailImageView = (ImageView) findViewById(R.id.iv_thumbnail);
     }
 

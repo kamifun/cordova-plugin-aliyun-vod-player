@@ -3,7 +3,6 @@ package com.aliyun.vodplayerview.view.gesturedialog;
 import android.app.Activity;
 
 import com.aliyun.utils.VcPlayerLog;
-import cn.com.Timekey.EasyHospital.R;
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
  */
@@ -19,7 +18,7 @@ public class VolumeDialog extends BaseGestureDialog {
     public VolumeDialog(Activity context, float percent) {
         super(context);
         initVolume = percent;
-        mImageView.setImageResource(R.drawable.alivc_volume_img);
+        mImageView.setImageResource(context.getResources().getIdentifier("alivc_volume_img", "drawable", context.getPackageName()));
         updateVolume(percent);
     }
 

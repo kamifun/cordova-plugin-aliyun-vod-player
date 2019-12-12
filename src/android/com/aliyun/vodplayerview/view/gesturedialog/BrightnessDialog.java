@@ -1,11 +1,11 @@
 package com.aliyun.vodplayerview.view.gesturedialog;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.aliyun.utils.VcPlayerLog;
-import cn.com.Timekey.EasyHospital.R;
 
 /*
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
@@ -21,14 +21,24 @@ public class BrightnessDialog extends BaseGestureDialog {
 
     // 当前亮度。0~100
     private int mCurrentBrightness = 0;
+    private Context context;
+
+    private Context getApplicationContext() {
+        return context;
+    }
+
+    private int getResByCordova(String attr, String name) {
+        return getApplicationContext().getResources().getIdentifier(name, attr, getApplicationContext().getPackageName());
+    }
 
     public BrightnessDialog(Activity activity, int percent) {
         super(activity);
+        this.context = activity;
 
         mCurrentBrightness = percent;
 
         //设置亮度图片
-        mImageView.setImageResource(R.drawable.alivc_brightness);
+        mImageView.setImageResource(getResByCordova("drawable", "alivc_brightness"));
         updateBrightness(percent);
     }
 
